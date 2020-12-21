@@ -1,7 +1,6 @@
 import {
   isValidStationName,
   isDuplicatedStations,
-  isValidSection,
 } from "../utils/validation.js";
 
 class ValidateSubwayManager {
@@ -45,7 +44,6 @@ class ValidateSubwayManager {
       this.arrivalStation
     );
   };
-
 
   checkNameValidation = () => {
     const userState = this.getState();

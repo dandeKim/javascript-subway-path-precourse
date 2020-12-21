@@ -27,24 +27,6 @@ const isDuplicatedStations = ($input, departureStation, arrivalStation) => {
   return isDuplicated;
 };
 
-const isValidStationsInSection = (
-  stationList,
-  departureStation,
-  arrivalStation
-) => {
-  const isIncludeBothStation =
-    stationList.includes(departureStation) &&
-    stationList.includes(arrivalStation);
-
-  if (!isIncludeBothStation) {
-    return false;
-  }
-  const departureStationIndex = stationList.indexOf(departureStation);
-  const arrivalStationIndex = stationList.indexOf(arrivalStation);
-
-  return departureStationIndex < arrivalStationIndex;
-};
-
 const isValidSection = ($input, lineResult) => {
   if (!lineResult) {
     showAlertMessage($input, ALERT.FAILED_TO_FIND_SECTION);
