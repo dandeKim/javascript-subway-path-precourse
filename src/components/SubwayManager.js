@@ -39,7 +39,6 @@ class SubwayManager {
       this.getLines
     );
     this.printResultManager = new PrintResultManager(
-      this.$resultContainer,
       this.getLines,
       this.getLineResult
     );

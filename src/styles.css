@@ -2,6 +2,13 @@ div {
   padding-bottom: 15px;
 }
 
+table,
+th,
+td {
+  border: 1px solid #000;
+  border-collapse: collapse;
+}
+
 #result-container {
   display: none;
 }
