@@ -1,5 +1,5 @@
-import { NUMBER, ALERT } from "./constants.js";
-import { showAlertMessage } from "./domUtils.js";
+import { NUMBER, ALERT } from "../../../@shared/constants.js";
+import { showAlertMessage } from "../../../@shared/domUtils.js";
 
 const isValidStationName = ($input, stationName, stationList) => {
   const name = stationName.trim();
@@ -27,13 +27,4 @@ const isDuplicatedStations = ($input, departureStation, arrivalStation) => {
   return isDuplicated;
 };
 
-const isValidSection = ($input, lineResult) => {
-  if (!lineResult) {
-    showAlertMessage($input, ALERT.FAILED_TO_FIND_SECTION);
-    return false;
-  }
-
-  return true;
-};
-
-export { isValidStationName, isDuplicatedStations, isValidSection };
+export { isValidStationName, isDuplicatedStations };

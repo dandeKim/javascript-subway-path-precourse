@@ -1,4 +1,4 @@
-import { getCheckedSearchType } from "../../utils/domUtils.js";
+import { getCheckedSearchType } from "../../@shared/domUtils.js";
 import ValidateManager from "./ValidateManager.js";
 
 class SubwayPathManager {

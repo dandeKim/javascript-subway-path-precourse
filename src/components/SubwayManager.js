@@ -1,7 +1,7 @@
 import SubwayPathManager from "./SubwayPathManager/SubwayPathManager.js";
 import ResultManager from "./ResultManager/ResultManager.js";
-import { stations, lines } from "../utils/data.js";
-import { hideElement, showElement } from "../utils/domUtils.js";
+import { stations, lines } from "../@shared/data.js";
+import { hideElement, showElement } from "../@shared/domUtils.js";
 
 class SubwayManager {
   constructor() {

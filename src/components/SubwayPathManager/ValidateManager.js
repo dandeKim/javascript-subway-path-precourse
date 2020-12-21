@@ -1,7 +1,7 @@
 import {
   isValidStationName,
   isDuplicatedStations,
-} from "../../utils/validation.js";
+} from "./utils/validation.js";
 
 class ValidateManager {
   constructor() {

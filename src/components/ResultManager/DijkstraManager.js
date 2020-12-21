@@ -1,4 +1,4 @@
-import Dijkstra from "../../utils/Dijkstra.js";
+import Dijkstra from "./utils/Dijkstra.js";
 
 class DijkstraManager {
   constructor(lineList) {

@@ -1,5 +1,5 @@
 import DijkstraManager from "./DijkstraManager.js";
-import { SEARCH_TYPE } from "../../utils/constants.js";
+import { SEARCH_TYPE } from "../../@shared/constants.js";
 
 class ResultManager {
   constructor(getState, getLines) {
