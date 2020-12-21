@@ -9,8 +9,8 @@ class PrintResultManager {
   };
 
   printLines = () => {
-    const lineResultText = this.lineResult.join("➡");
-    this.$tbody.innerHTML += `
+    const lineResultText = this.lineResult?.join("➡") || "";
+    this.$tbody.innerHTML = `
       <tr>
         <td colspan="2">${lineResultText}</td>
       </tr>
