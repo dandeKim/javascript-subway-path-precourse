@@ -1,9 +1,7 @@
 import SubwayPathManager from "./SubwayPathManager/SubwayPathManager.js";
-import PrintResultManager from "./PrintResultManager.js";
-import DijkstraManager from "./DijkstraManager.js";
+import ResultManager from "./ResultManager/ResultManager.js";
 import { stations, lines } from "../utils/data.js";
 import { hideElement, showElement } from "../utils/domUtils.js";
-import { SEARCH_TYPE } from "../utils/constants.js";
 
 class SubwayManager {
   constructor() {
@@ -13,7 +11,7 @@ class SubwayManager {
     this.render();
   }
 
-  setDOMElements = () => {
+  setDOMElement = () => {
     this.$resultContainer = document.querySelector("#result-container");
   };
 
@@ -22,18 +20,14 @@ class SubwayManager {
       this.getStations,
       this.setState
     );
-    this.printResultManager = new PrintResultManager(
-      this.getLines,
-      this.getLineResult
-    );
-    this.dijkstraManager = new DijkstraManager(this.getLines);
+    this.resultManager = new ResultManager(this.getState, this.getLines);
   };
 
   setState = (departureStation, arrivalStation, searchType) => {
     this.userState = { departureStation, arrivalStation, searchType };
 
     showElement(this.$resultContainer);
-    this.printResultManager.render();
+    this.resultManager.printResult();
   };
 
   getState = () => {
@@ -50,37 +44,12 @@ class SubwayManager {
     return this.lines;
   };
 
-  getLineResult = () => {
-    return this.lineResult;
-  };
-
-  getLineResult = () => {
-    const { departureStation, arrivalStation, searchType } = this.userState;
-    let lineResult;
-
-    if (searchType === SEARCH_TYPE.DISTANCE) {
-      lineResult = this.dijkstraManager.getDistanceResult(
-        departureStation,
-        arrivalStation
-      );
-    }
-
-    if (searchType === SEARCH_TYPE.MINUTE) {
-      lineResult = this.dijkstraManager.getMinuteResult(
-        departureStation,
-        arrivalStation
-      );
-    }
-
-    return lineResult;
-  };
-
   resetDOMElements = () => {
     hideElement(this.$resultContainer);
   };
 
   render = () => {
-    this.setDOMElements();
+    this.setDOMElement();
     this.resetDOMElements();
     this.setComponents();
   };

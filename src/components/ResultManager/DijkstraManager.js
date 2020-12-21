@@ -1,8 +1,8 @@
-import Dijkstra from "../utils/Dijkstra.js";
+import Dijkstra from "../../utils/Dijkstra.js";
 
 class DijkstraManager {
-  constructor(getLines) {
-    this.getLines = getLines;
+  constructor(lineList) {
+    this.lineList = lineList;
 
     this.render();
   }
@@ -32,9 +32,8 @@ class DijkstraManager {
   render = () => {
     this.distanceManager = new Dijkstra();
     this.minuteManager = new Dijkstra();
-    this.lines = this.getLines();
 
-    this.lines.forEach(line => {
+    this.lineList.forEach(line => {
       this.setManager(this.distanceManager, line.station, line.kilometer);
       this.setManager(this.minuteManager, line.station, line.minute);
     });
