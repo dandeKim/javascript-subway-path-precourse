@@ -1,5 +1,6 @@
 import DijkstraManager from "./DijkstraManager.js";
 import { SEARCH_TYPE } from "../../@shared/constants.js";
+import { pathTemplate } from "./utils/template.js";
 
 class ResultManager {
   constructor(getState, getLines) {
@@ -40,18 +41,10 @@ class ResultManager {
     this.getSearchResult();
   };
 
-  printPath = () => {
-    const pathResult = this.searchResult?.join("➡") || "";
-    this.$tbody.innerHTML = `
-      <tr>
-        <td colspan="2">${pathResult}</td>
-      </tr>
-    `;
-  };
-
   printResult = () => {
     this.setSearchResult();
-    this.printPath();
+
+    this.$tbody.innerHTML = pathTemplate(this.searchResult);
   };
 
   render = () => {
