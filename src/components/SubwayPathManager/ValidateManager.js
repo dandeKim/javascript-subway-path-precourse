@@ -1,53 +1,58 @@
-import {
-  isValidStationName,
-  isDuplicatedStations,
-} from "./utils/validation.js";
+import { NUMBER, ALERT } from "../../@shared/constants.js";
+import { showAlertMessage } from "../../@shared/domUtils.js";
 
 class ValidateManager {
-  constructor() {
+  constructor(stationList) {
+    this.stationList = stationList;
+
     this.render();
   }
 
   setDOMElements = () => {
-    this.$departureStationInput = document.querySelector(
+    this.$departureInput = document.querySelector(
       "#departure-station-name-input"
     );
-    this.$arrivalStationInput = document.querySelector(
-      "#arrival-station-name-input"
-    );
+    this.$arrivalInput = document.querySelector("#arrival-station-name-input");
   };
 
-  isValidDepartureStation = () => {
-    return isValidStationName(
-      this.$departureStationInput,
-      this.departureStation,
-      this.stationList
-    );
-  };
+  isValidStationName = ($input, stationName) => {
+    const name = stationName.trim();
+    const isValidNameLength = name.length >= NUMBER.MIN_STATION_NAME_LENGTH;
+    const isValidStation = this.stationList.includes(name);
 
-  isValidArrivalStation = () => {
-    return isValidStationName(
-      this.$arrivalStationInput,
-      this.arrivalStation,
-      this.stationList
-    );
+    if (!isValidNameLength) {
+      showAlertMessage($input, ALERT.INVALID_STATION_NAME_LENGTH);
+    }
+
+    if (!isValidStation) {
+      showAlertMessage($input, ALERT.INVALID_STATION_NAME);
+    }
+
+    return isValidNameLength && isValidStation;
   };
 
   isDuplicatedStation = () => {
-    return isDuplicatedStations(
-      this.$arrivalStationInput,
-      this.departureStation,
-      this.arrivalStation
-    );
+    const isDuplicated = this.departureStation === this.arrivalStation;
+
+    if (isDuplicated) {
+      showAlertMessage(this.$arrivalInput, ALERT.DUPLICATED_STATIONS);
+    }
+
+    return isDuplicated;
   };
 
-  checkNameValidation = (departureStation, arrivalStation, stationList) => {
+  checkNameValidation = (departureStation, arrivalStation) => {
     this.departureStation = departureStation;
     this.arrivalStation = arrivalStation;
-    this.stationList = stationList;
 
-    if (!this.isValidDepartureStation()) return false;
-    if (!this.isValidArrivalStation()) return false;
+    if (!this.isValidStationName(this.$departureInput, this.departureStation)) {
+      return false;
+    }
+
+    if (!this.isValidStationName(this.$arrivalInput, this.arrivalStation)) {
+      return false;
+    }
+
     if (this.isDuplicatedStation()) return false;
 
     return true;

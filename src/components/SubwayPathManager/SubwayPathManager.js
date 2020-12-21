@@ -23,7 +23,7 @@ class SubwayPathManager {
   };
 
   setComponents = () => {
-    this.validateManager = new ValidateManager();
+    this.validateManager = new ValidateManager(this.stationList);
   };
 
   handleSearchButton = event => {
@@ -34,8 +34,7 @@ class SubwayPathManager {
 
     const isValidUserState = this.validateManager.checkNameValidation(
       departureStation,
-      arrivalStation,
-      this.stationList
+      arrivalStation
     );
 
     if (!isValidUserState) return;
