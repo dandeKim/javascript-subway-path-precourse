@@ -41,7 +41,7 @@ class ValidateManager {
     return isDuplicated;
   };
 
-  checkNameValidation = (departureStation, arrivalStation) => {
+  checkStationValidation = (departureStation, arrivalStation) => {
     this.departureStation = departureStation;
     this.arrivalStation = arrivalStation;
 

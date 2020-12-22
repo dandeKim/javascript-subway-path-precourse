@@ -2,21 +2,19 @@ import { getCheckedSearchType } from "../../@shared/domUtils.js";
 import ValidateManager from "./ValidateManager.js";
 
 class SubwayPathManager {
-  constructor(getStations, setState) {
+  constructor(getStations, setUserState) {
     this.stationList = getStations();
-    this.setState = setState;
+    this.setUserState = setUserState;
 
     this.render();
   }
 
   setDOMElements = () => {
-    this.$departureStationInput = document.querySelector(
+    this.$departureInput = document.querySelector(
       "#departure-station-name-input"
     );
-    this.$arrivalStationInput = document.querySelector(
-      "#arrival-station-name-input"
-    );
-    this.$searchTypeRadioInputs = document.querySelectorAll(
+    this.$arrivalInput = document.querySelector("#arrival-station-name-input");
+    this.$searchTypeInputs = document.querySelectorAll(
       "input[name='search-type']"
     );
     this.$searchButton = document.querySelector("#search-button");
@@ -28,18 +26,18 @@ class SubwayPathManager {
 
   handleSearchButton = event => {
     event.preventDefault();
-    const departureStation = this.$departureStationInput.value;
-    const arrivalStation = this.$arrivalStationInput.value;
-    const searchType = getCheckedSearchType(this.$searchTypeRadioInputs);
+    const departureStation = this.$departureInput.value;
+    const arrivalStation = this.$arrivalInput.value;
+    const searchType = getCheckedSearchType(this.$searchTypeInputs);
 
-    const isValidUserState = this.validateManager.checkNameValidation(
+    const isValidStationNames = this.validateManager.checkStationValidation(
       departureStation,
       arrivalStation
     );
 
-    if (!isValidUserState) return;
+    if (!isValidStationNames) return;
 
-    this.setState(departureStation, arrivalStation, searchType);
+    this.setUserState(departureStation, arrivalStation, searchType);
   };
 
   render = () => {

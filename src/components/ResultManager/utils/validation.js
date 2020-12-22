@@ -1,9 +1,9 @@
-import { ALERT } from "../../../@shared/constants";
-import { showAlertMessage } from "../../../@shared/domUtils";
+import { ALERT } from "../../../@shared/constants.js";
+import { showAlertMessage } from "../../../@shared/domUtils.js";
 
-const isValidSection = ($input, lineResult) => {
+const isValidPath = ($input, lineResult) => {
   if (!lineResult) {
-    showAlertMessage($input, ALERT.FAILED_TO_FIND_SECTION);
+    showAlertMessage($input, ALERT.FAILED_TO_FIND_PATH);
 
     return false;
   }
@@ -11,4 +11,4 @@ const isValidSection = ($input, lineResult) => {
   return true;
 };
 
-export { isValidSection };
+export { isValidPath };
