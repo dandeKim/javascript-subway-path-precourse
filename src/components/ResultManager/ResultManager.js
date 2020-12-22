@@ -1,10 +1,13 @@
 import DijkstraManager from "./DijkstraManager.js";
 import { SEARCH_TYPE } from "../../@shared/constants.js";
+import { hideElement, showElement } from "../../@shared/domUtils.js";
 import { pathTemplate } from "./utils/template.js";
+import { isValidPath } from "./utils/validation.js";
 
 class ResultManager {
-  constructor(getState, getLines) {
-    this.getState = getState;
+  constructor($resultContainer, getUserState, getLines) {
+    this.$resultContainer = $resultContainer;
+    this.getUserState = getUserState;
     this.lineList = getLines();
 
     this.render();
@@ -12,14 +15,19 @@ class ResultManager {
 
   setDOMElements = () => {
     this.$tbody = document.querySelector("#result-table tbody");
+    this.$arrivalInput = document.querySelector("#arrival-station-name-input");
   };
 
   setComponent = () => {
     this.dijkstraManager = new DijkstraManager(this.lineList);
   };
 
-  getSearchResult = () => {
-    const { departureStation, arrivalStation, searchType } = this.userState;
+  setSearchResult = () => {
+    const {
+      departureStation,
+      arrivalStation,
+      searchType,
+    } = this.getUserState();
 
     if (searchType === SEARCH_TYPE.DISTANCE) {
       this.searchResult = this.dijkstraManager.getDistanceResult(
@@ -36,14 +44,16 @@ class ResultManager {
     }
   };
 
-  setSearchResult = () => {
-    this.userState = this.getState();
-    this.getSearchResult();
-  };
-
   printResult = () => {
     this.setSearchResult();
 
+    if (!isValidPath(this.$arrivalInput, this.searchResult)) {
+      hideElement(this.$resultContainer);
+
+      return;
+    }
+
+    showElement(this.$resultContainer);
     this.$tbody.innerHTML = pathTemplate(this.searchResult);
   };
 

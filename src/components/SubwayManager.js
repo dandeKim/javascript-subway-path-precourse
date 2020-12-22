@@ -1,7 +1,7 @@
 import SubwayPathManager from "./SubwayPathManager/SubwayPathManager.js";
 import ResultManager from "./ResultManager/ResultManager.js";
 import { stations, lines } from "../@shared/data.js";
-import { hideElement, showElement } from "../@shared/domUtils.js";
+import { hideElement } from "../@shared/domUtils.js";
 
 class SubwayManager {
   constructor() {
@@ -18,19 +18,21 @@ class SubwayManager {
   setComponents = () => {
     this.subwayPathManager = new SubwayPathManager(
       this.getStations,
-      this.setState
+      this.setUserState
     );
-    this.resultManager = new ResultManager(this.getState, this.getLines);
+    this.resultManager = new ResultManager(
+      this.$resultContainer,
+      this.getUserState,
+      this.getLines
+    );
   };
 
-  setState = (departureStation, arrivalStation, searchType) => {
+  setUserState = (departureStation, arrivalStation, searchType) => {
     this.userState = { departureStation, arrivalStation, searchType };
-
-    showElement(this.$resultContainer);
     this.resultManager.printResult();
   };
 
-  getState = () => {
+  getUserState = () => {
     if (!this.userState) return;
 
     return this.userState;
