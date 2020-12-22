@@ -1,4 +1,5 @@
 import Dijkstra from "./utils/Dijkstra.js";
+import { UNIT } from "../../@shared/constants.js";
 
 class DijkstraManager {
   constructor(lineList) {
@@ -23,6 +24,23 @@ class DijkstraManager {
   };
 
   getMinuteResult = (departureStation, arrivalStation) => {
+  getTotalLength = (path, unit) => {
+    if (unit === UNIT.KILOMETER_UNIT) {
+      this.adjacencyList = this.distanceManager.getAdjacencyList();
+    }
+
+    if (unit === UNIT.MINUTE_UNIT) {
+      this.adjacencyList = this.minuteManager.getAdjacencyList();
+    }
+
+    let totalLength = 0;
+    for (let i = 0; i < path.length - 1; i++) {
+      totalLength += this.adjacencyList[path[i]][path[i + 1]];
+    }
+
+    return totalLength;
+  };
+
     return this.minuteManager.findShortestPath(
       departureStation,
       arrivalStation

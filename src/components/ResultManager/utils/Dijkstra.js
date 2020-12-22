@@ -212,7 +212,11 @@ export default function Dijkstra() {
     return WeightedGraph.findShortestRoute(source, target);
   };
 
-  this.addVertex = (vertex) => {
+  this.getAdjacencyList = () => {
+    return WeightedGraph.adjacencyList;
+  };
+
+  this.addVertex = vertex => {
     WeightedGraph.addVertex(vertex);
   };
 
