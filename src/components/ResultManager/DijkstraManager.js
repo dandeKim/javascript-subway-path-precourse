@@ -16,14 +16,13 @@ class DijkstraManager {
     }
   };
 
-  getDistanceResult = (departureStation, arrivalStation) => {
+  getDistancePath = (departureStation, arrivalStation) => {
     return this.distanceManager.findShortestPath(
       departureStation,
       arrivalStation
     );
   };
 
-  getMinuteResult = (departureStation, arrivalStation) => {
   getTotalLength = (path, unit) => {
     if (unit === UNIT.KILOMETER_UNIT) {
       this.adjacencyList = this.distanceManager.getAdjacencyList();
@@ -41,6 +40,7 @@ class DijkstraManager {
     return totalLength;
   };
 
+  getMinutePath = (departureStation, arrivalStation) => {
     return this.minuteManager.findShortestPath(
       departureStation,
       arrivalStation
