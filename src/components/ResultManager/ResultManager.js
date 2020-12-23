@@ -22,7 +22,7 @@ class ResultManager {
     this.dijkstraManager = new DijkstraManager(this.lineList);
   };
 
-  setSearchResult = () => {
+  setsearchedPathList = () => {
     const {
       departureStation,
       arrivalStation,
@@ -30,14 +30,14 @@ class ResultManager {
     } = this.getUserState();
 
     if (searchType === SEARCH_TYPE.DISTANCE) {
-      this.searchResult = this.dijkstraManager.getDistancePath(
+      this.searchedPathList = this.dijkstraManager.getDistancePath(
         departureStation,
         arrivalStation
       );
     }
 
     if (searchType === SEARCH_TYPE.MINUTE) {
-      this.searchResult = this.dijkstraManager.getMinutePath(
+      this.searchedPathList = this.dijkstraManager.getMinutePath(
         departureStation,
         arrivalStation
       );
@@ -46,21 +46,21 @@ class ResultManager {
 
   setTotalDistance = () => {
     this.totalDistance = this.dijkstraManager.getTotalLength(
-      this.searchResult,
+      this.searchedPathList,
       UNIT.KILOMETER_UNIT
     );
 
     this.totalMinute = this.dijkstraManager.getTotalLength(
-      this.searchResult,
+      this.searchedPathList,
       UNIT.MINUTE_UNIT
     );
   };
 
   printResult = () => {
-    this.setSearchResult();
+    this.setsearchedPathList();
     this.setTotalDistance();
 
-    if (!isValidPath(this.$arrivalInput, this.searchResult)) {
+    if (!isValidPath(this.$arrivalInput, this.searchedPathList)) {
       hideElement(this.$resultContainer);
 
       return;
@@ -69,7 +69,7 @@ class ResultManager {
     showElement(this.$resultContainer);
     this.$tbody.innerHTML =
       unitTemplate(this.totalDistance, this.totalMinute) +
-      pathTemplate(this.searchResult);
+      pathTemplate(this.searchedPathList);
   };
 
   render = () => {

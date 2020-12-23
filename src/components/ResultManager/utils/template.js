@@ -9,10 +9,10 @@ const unitTemplate = (distance, time) => {
     `;
 };
 
-const pathTemplate = searchResult => {
+const pathTemplate = searchedPathList => {
   return `
       <tr>
-        <td colspan="2">${searchResult.join(" ➡ ")}</td>
+        <td colspan="2">${searchedPathList.join(" ➡ ")}</td>
       </tr>
     `;
 };
