@@ -1,5 +1,33 @@
 # 🚇 지하철 노선도 경로 조회 미션
 
+## 디렉터리 구조
+
+```sh
+javascript-subway-path-precourse
+├── README.md
+├── index.html
+├── images
+├── docs
+│   └── README.md
+└── src
+    ├── @shared
+    │   ├── constants.js
+    │   ├── data.js
+    │   └── domUtils.js
+    └── components
+        ├── SubwayManager.js
+	├── SubwayPathManager
+	│   ├── SubwayPathManager.js
+        │   └── ValidateManager.js
+        └── ResultManager
+            ├── ResultManager.js
+	    ├── DijkstraManager.js
+            └── utils
+	        ├── Dijkstra.js
+       	        ├── template.js
+       	        └── validation.js
+```
+
 ## ✔️ 구현할 기능 목록
 
 ### 화면 (view)
